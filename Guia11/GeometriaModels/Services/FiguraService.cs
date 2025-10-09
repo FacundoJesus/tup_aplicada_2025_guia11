@@ -1,4 +1,5 @@
 ﻿using GeometriaModels.DALs;
+using GeometriaModels.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +10,27 @@ namespace GeometriaModels.Services
 {
     public class FiguraService
     {
-        IFiguraDAL FiguraDAL;
+        IFiguraDAL _figurasDAL;
 
-        //DOS TIPOS DE INYECCIONES DE DEPENDENCIA: por constructor o por getter y setter
-        public FiguraService(IFiguraDAL f)
+        public FiguraService(IFiguraDAL figurasDAL)
         {
-            this.FiguraDAL = f;
+            _figurasDAL = figurasDAL;
         }
 
-        //CREAR CIRCULO
+        public List<FiguraModel> GetAll()
+        {
+            return _figurasDAL.GetAll();
+        }
 
-        //CREAR RECTANGULO
+        public FiguraModel GetById(int id)
+        {
+            return _figurasDAL.GetById(id);
+        }
+
+        public FiguraModel AddFigura(FiguraModel nueva)
+        {
+            return _figurasDAL.Add(nueva);
+        }
 
     }
 }

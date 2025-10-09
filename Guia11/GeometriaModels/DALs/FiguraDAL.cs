@@ -11,73 +11,42 @@ namespace GeometriaModels.DALs
     {
         List<FiguraModel> figuras = new List<FiguraModel>();
 
-        public List<FiguraModel> GetAll()
+        public FiguraModel Add(FiguraModel figura)
         {
-            return figuras;
-        }
-
-        public FiguraModel GetById(int id)
-        {
-            //return (from f in figuras where f.Id == id select f).FirstOrDefault();
-            return figuras.Where(p=>p.Id==id).FirstOrDefault();
-            FiguraModel figura;
-            figura = new CirculoModel();
-            figuras.Sort();
-            int idx = figuras.BinarySearch(figura);
-            if(idx > -1)
-            {
-                figura = figuras[idx];
-            }
-            return figura;
-        }
-
-        public FiguraModel Add(FiguraModel f)
-        {
-            //figura.Id = (from f in figuras select f.Id).DefaultIfEmpty(0).Max() + 1;
-            var figura = GetById(f.Id);
-            if (figura == null)
-            {
-                figuras.Add(figura);
-            }
+            figura.Id = GenId();
+            figuras.Add(figura);
             return figura;
         }
 
         public void Delete(int id)
         {
-            FiguraModel figura = GetById(id);
+            var figura = GetById(id);
             if (figura != null)
             {
                 figuras.Remove(figura);
             }
         }
 
-        public FiguraModel Save(FiguraModel entidad)
+        public List<FiguraModel> GetAll()
         {
-            var figura = GetById(entidad.Id);
+            return figuras;
+        }
 
-            if (figuras == null)
-            {
-                return null;
-            }
-            if (figura.GetType() != entidad.GetType()) {
-                return null;
-            }
-            if (entidad is RectanguloModel r)
-            {
-                var rect = figura as RectanguloModel;
+        public FiguraModel? GetById(int id)
+        {
+            return (from f in figuras where f.Id == id select f).FirstOrDefault();
+        }
 
-                rect.Area = r.Area;
-                rect.Ancho = r.Ancho;
-                rect.Largo = r.Largo;
-            }
-            else if (entidad is CirculoModel c)
-            {
-                var circ = figura as CirculoModel;
-                
-                circ.Area = c.Area;
-                circ.Radio = c.Radio;
-            }
-            return figura;             
+        public FiguraModel? Save(FiguraModel entidad)
+        {
+            entidad.Id = GenId();
+            figuras.Add(entidad);
+            return entidad;
+        }
+
+        protected int? GenId()
+        {
+            return (from f in figuras select f.Id).DefaultIfEmpty(0).Max() + 1;
         }
     }
 }
