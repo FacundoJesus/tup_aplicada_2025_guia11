@@ -1,4 +1,3 @@
-
 using GeometriaDesktop;
 using GeometriaModels.DALs;
 using GeometriaModels.Services;
@@ -39,5 +38,5 @@ var host = Host.CreateDefaultBuilder()
 .Build();
 
 ApplicationConfiguration.Initialize();
-var form = host.Services.GetRequiredService<Form1>();
+var form = host.Services.GetRequiredService<Form1>(); //Va al contenedor y busa una instancia. Dame un objeto de ese tipo.
 Application.Run(form);

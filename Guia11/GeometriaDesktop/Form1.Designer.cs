@@ -1,4 +1,5 @@
-﻿namespace GeometriaDesktop
+﻿
+namespace GeometriaDesktop
 {
     partial class Form1
     {
@@ -43,9 +44,9 @@
             rbCirculo = new RadioButton();
             rbRectangulo = new RadioButton();
             groupBox3 = new GroupBox();
-            lsvFiguras = new ListView();
+            lvwFiguras = new ListView();
             btnEliminarRegistro = new Button();
-            btnActualizarListado = new Button();
+            btnActualizar = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -89,6 +90,7 @@
             btnLimpiar.TabIndex = 9;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
             // 
             // tbArea
             // 
@@ -189,9 +191,9 @@
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(lsvFiguras);
+            groupBox3.Controls.Add(lvwFiguras);
             groupBox3.Controls.Add(btnEliminarRegistro);
-            groupBox3.Controls.Add(btnActualizarListado);
+            groupBox3.Controls.Add(btnActualizar);
             groupBox3.Location = new Point(12, 198);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(470, 327);
@@ -199,13 +201,15 @@
             groupBox3.TabStop = false;
             groupBox3.Text = "Listado de Figuras";
             // 
-            // lsvFiguras
+            // lvwFiguras
             // 
-            lsvFiguras.Location = new Point(15, 33);
-            lsvFiguras.Name = "lsvFiguras";
-            lsvFiguras.Size = new Size(337, 274);
-            lsvFiguras.TabIndex = 13;
-            lsvFiguras.UseCompatibleStateImageBehavior = false;
+            lvwFiguras.Location = new Point(15, 33);
+            lvwFiguras.Name = "lvwFiguras";
+            lvwFiguras.Size = new Size(337, 274);
+            lvwFiguras.TabIndex = 13;
+            lvwFiguras.UseCompatibleStateImageBehavior = false;
+            lvwFiguras.ItemSelectionChanged += lvwFiguras_ItemSelectionChanged;
+            
             // 
             // btnEliminarRegistro
             // 
@@ -216,14 +220,15 @@
             btnEliminarRegistro.Text = "Eliminar Registro";
             btnEliminarRegistro.UseVisualStyleBackColor = true;
             // 
-            // btnActualizarListado
+            // btnActualizar
             // 
-            btnActualizarListado.Location = new Point(379, 71);
-            btnActualizarListado.Name = "btnActualizarListado";
-            btnActualizarListado.Size = new Size(75, 51);
-            btnActualizarListado.TabIndex = 11;
-            btnActualizarListado.Text = "Actualizar Listado";
-            btnActualizarListado.UseVisualStyleBackColor = true;
+            btnActualizar.Location = new Point(379, 71);
+            btnActualizar.Name = "btnActualizar";
+            btnActualizar.Size = new Size(75, 51);
+            btnActualizar.TabIndex = 11;
+            btnActualizar.Text = "Actualizar Listado";
+            btnActualizar.UseVisualStyleBackColor = true;
+            btnActualizar.Click += btnActualizar_Click;
             // 
             // Form1
             // 
@@ -261,7 +266,7 @@
         private RadioButton rbRectangulo;
         private GroupBox groupBox3;
         private Button btnEliminarRegistro;
-        private Button btnActualizarListado;
-        private ListView lsvFiguras;
+        private Button btnActualizar;
+        private ListView lvwFiguras;
     }
 }

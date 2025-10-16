@@ -10,16 +10,15 @@ namespace GeometriaDesktop
         #region ListView redibujado
         public void lvwInicializar()
         {
-            lsvFiguras.View = View.Tile;
-            lsvFiguras.FullRowSelect = true;
-            lsvFiguras.HideSelection = false;
-            lsvFiguras.OwnerDraw = true;
-            lsvFiguras.TileSize = new Size(300, 100);
-            lsvFiguras.BackColor = Color.WhiteSmoke;
-            lsvFiguras.BorderStyle = BorderStyle.None;
-            lsvFiguras.DrawItem += lvwFiguras_DrawItem;
-            lsvFiguras.SelectedIndexChanged += lvwFiguras_SelectedIndexChanged;
-
+            lvwFiguras.View = View.Tile;
+            lvwFiguras.FullRowSelect = true;
+            lvwFiguras.HideSelection = false;
+            lvwFiguras.OwnerDraw = true;
+            lvwFiguras.TileSize = new Size(300, 100);
+            lvwFiguras.BackColor = Color.WhiteSmoke;
+            lvwFiguras.BorderStyle = BorderStyle.None;
+            lvwFiguras.DrawItem += lvwFiguras_DrawItem;
+            lvwFiguras.SelectedIndexChanged += lvwFiguras_SelectedIndexChanged;
         }
 
         private GraphicsPath RoundedRect(Rectangle bounds, int radius)
@@ -75,7 +74,7 @@ namespace GeometriaDesktop
         }
         private void lvwFiguras_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lsvFiguras.Invalidate();
+            lvwFiguras.Invalidate();
         }
         #endregion
 
@@ -85,19 +84,122 @@ namespace GeometriaDesktop
         {
             _figurasService = figurasService;
             InitializeComponent();
+            lvwInicializar();
         }
 
         private void btnConfirmarRegistro_Click(object sender, EventArgs e)
         {
-            _figurasService.AddFigura(new RectanguloModel { Ancho = 2, Largo = 4 });
+            FiguraModel figura = null;
+            if (rbRectangulo.Checked)
+            {
+                figura = new RectanguloModel()
+                {
+                    Ancho = Convert.ToDouble(tbAncho.Text),
+                    Largo = Convert.ToDouble(tbLargo.Text)
+                };
+            }
+            else if (rbCirculo.Checked)
+            {
+                figura = new CirculoModel()
+                {
+                    Radio = Convert.ToDouble(tbRadio.Text)
+                };
+            }
+
+            if (figura != null)
+                _figurasService.AddFigura(figura);
+
+            btnActualizar.PerformClick();
+            btnLimpiar.PerformClick();
         }
 
-        /*private void btnActualizarListado_Click(object sender, EventArgs e)
+        private void btnActualizar_Click(object sender, EventArgs e)
         {
+            lvwFiguras.Items.Clear();
+
             foreach (var figura in _figurasService.GetAll())
             {
-                lsvFiguras.Items.Add(figura);
+                var item = new ListViewItem();
+                if (figura is RectanguloModel r)
+                {
+                    item = new ListViewItem(new string[]
+                    {
+                    $"Rectangulo: #{r.Id}",
+                    $"Area: {r.Area:f2}",
+                    $"Ancho: {r.Ancho:f2}, Largo: {r.Largo:f2}"
+                    });
+                }
+                else if (figura is CirculoModel c)
+                {
+                    item = new ListViewItem(new string[]
+                    {
+                    $"Circulo: #{c.Id}",
+                    $"Area: {c.Area:f2}",
+                    $"Radio: {c.Radio:f2}"
+                    });
+                }
+
+                item.Tag = figura; //lo necesitamos para tomarlo luego cuando lo seleccionemos
+                lvwFiguras.Items.Add(item);
             }
-        }*/
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            tbAncho.Clear();
+            tbLargo.Clear();
+            tbRadio.Clear();
+            tbArea.Clear();
+
+            tbAncho.Enabled = true;
+            tbLargo.Enabled = true;
+            tbRadio.Enabled = true;
+            tbArea.Enabled = true;
+
+            lvwFiguras.SelectedItems.Clear();
+            rbRectangulo.Checked = false;
+            rbCirculo.Checked = false;
+            rbRectangulo.Enabled = true;
+            rbCirculo.Enabled = true;
+        }
+
+        private void lvwFiguras_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (e.IsSelected)
+            {
+                var figuraSelected = e.Item.Tag as FiguraModel;
+
+                if (figuraSelected != null)
+                {
+                    tbAncho.Clear();
+                    tbLargo.Clear();
+                    tbRadio.Clear();
+                    rbRectangulo.Enabled = false;
+                    rbCirculo.Enabled = false;
+
+                    tbArea.Text = $"{figuraSelected.Area:f2}";
+
+                    if (figuraSelected is RectanguloModel r)
+                    {
+                        rbRectangulo.Checked = true;
+                        tbAncho.Text = $"{r.Ancho:f2}";
+                        tbLargo.Text = $"{r.Largo:f2}";
+                        
+                        tbAncho.Enabled = true;
+                        tbLargo.Enabled = true;
+                        tbRadio.Enabled = false;
+                    }
+                    else if (figuraSelected is CirculoModel c)
+                    {
+                        rbCirculo.Checked = true;
+                        tbRadio.Text = $"{c.Radio:f2}";
+
+                        tbAncho.Enabled = false;
+                        tbLargo.Enabled = false;
+                        tbRadio.Enabled = true;
+                    }
+                }
+            }
+        }
     }
 }

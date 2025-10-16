@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometriaModels", "Geometri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometriaDesktop", "GeometriaDesktop\GeometriaDesktop.csproj", "{266EE499-5BA2-473E-9399-047131E3C155}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometriaAPIWeb", "GeometriaAPIWeb\GeometriaAPIWeb.csproj", "{D2733F5D-DA70-4C45-A9A7-DAA393601640}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{266EE499-5BA2-473E-9399-047131E3C155}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{266EE499-5BA2-473E-9399-047131E3C155}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{266EE499-5BA2-473E-9399-047131E3C155}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2733F5D-DA70-4C45-A9A7-DAA393601640}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2733F5D-DA70-4C45-A9A7-DAA393601640}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2733F5D-DA70-4C45-A9A7-DAA393601640}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2733F5D-DA70-4C45-A9A7-DAA393601640}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
