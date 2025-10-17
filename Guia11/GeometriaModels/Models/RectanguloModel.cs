@@ -17,5 +17,17 @@ namespace GeometriaModels.Models
             this.Ancho = ancho;
             this.Largo = largo;
         }
+
+
+        public override double? CalcularArea()
+        {
+            // Si alguno de los valores es null, Area será null
+            if (Ancho == null || Largo == null)
+                this.Area = null;
+            else
+                this.Area = Ancho * Largo;
+
+            return this.Area;
+        }
     }
 }

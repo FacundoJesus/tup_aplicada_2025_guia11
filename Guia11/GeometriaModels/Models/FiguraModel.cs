@@ -18,7 +18,9 @@ namespace GeometriaModels.Models
             this.Area = area;
         }
 
-        public int CompareTo(object? obj)
+        public abstract double? CalcularArea();
+
+        public int CompareTo(object obj)
         {
             FiguraModel nuevaFigura = obj as FiguraModel;
             if(nuevaFigura != null)

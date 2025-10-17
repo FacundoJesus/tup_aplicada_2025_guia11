@@ -177,6 +177,7 @@ namespace GeometriaDesktop
                     rbRectangulo.Enabled = false;
                     rbCirculo.Enabled = false;
 
+                    figuraSelected.CalcularArea(); // Esto asigna Area
                     tbArea.Text = $"{figuraSelected.Area:f2}";
 
                     if (figuraSelected is RectanguloModel r)
@@ -193,7 +194,7 @@ namespace GeometriaDesktop
                     {
                         rbCirculo.Checked = true;
                         tbRadio.Text = $"{c.Radio:f2}";
-
+                        
                         tbAncho.Enabled = false;
                         tbLargo.Enabled = false;
                         tbRadio.Enabled = true;
