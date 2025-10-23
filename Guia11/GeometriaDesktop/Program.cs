@@ -3,9 +3,10 @@ using GeometriaModels.DALs;
 using GeometriaModels.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Hosting; //Hosting...
 using Microsoft.Extensions.Options;
 
+//host es el contenedor principal de la aplicación.
 var host = Host.CreateDefaultBuilder()
 .ConfigureServices((context, services) =>
 {
@@ -33,7 +34,9 @@ var host = Host.CreateDefaultBuilder()
     services.AddSingleton<FiguraService>();
     #endregion
 
+    #region Registro de las vistas
     services.AddTransient<Form1>();
+    #endregion
 })
 .Build();
 
